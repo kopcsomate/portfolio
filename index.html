@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <title>Kopcsó Máté Levente | Full-Stack Developer</title>
+  <meta name="description" content="Kopcsó Máté Levente - Full-Stack Developer, Automation & Process Optimization Specialist." />
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg2: #0b1f35;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.12);
+      --text: #eef6ff;
+      --muted: #a7bad1;
+      --accent: #39d0ff;
+      --accent2: #8e7dff;
+      --line: rgba(255,255,255,.16);
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(57,208,255,.22), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(142,125,255,.25), transparent 34%),
+        linear-gradient(145deg, var(--bg), var(--bg2));
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      position: fixed;
+      z-index: 20;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 28px));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: rgba(7,17,31,.72);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 42px rgba(0,0,0,.22);
+    }
+
+    .brand { font-weight: 900; letter-spacing: .06em; font-size: 18px; }
+    .nav-links { display: flex; gap: 22px; align-items: center; font-size: 17px; color: var(--muted); font-weight: 800; }
+    .nav-links a { padding: 10px 6px; transition: color .2s ease, transform .2s ease; }
+    .nav-links a:hover { color: var(--text); transform: translateY(-1px); }
+    .lang-btn {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .container { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    section { padding: 70px 0; }
+
+    .hero {
+      min-height: 82vh;
+      display: grid;
+      place-items: center;
+      padding-top: 120px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .photo-wrap {
+      position: relative;
+      width: min(330px, 78vw);
+      aspect-ratio: 1;
+      margin: auto;
+      border-radius: 50%;
+      padding: 8px;
+      background: conic-gradient(from 180deg, var(--accent), var(--accent2), transparent, var(--accent));
+      box-shadow: var(--shadow);
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 8px solid #09192b;
+      background: #11263d;
+    }
+
+    .hero h1 {
+        margin: 0;
+        font-size: clamp(44px, 7vw, 86px);
+        line-height: 1.25;
+        letter-spacing: 0;
+        padding-bottom: 0;
+        overflow: visible;
+    }
+
+    .gradient-text {
+        display: inline-block;
+        line-height: 1.15;
+        background: linear-gradient(90deg, #fff, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        padding-bottom: 0.18em;
+        margin-bottom: -0.08em;
+    }
+    .flag-img{
+        width:42px;
+        height:42px;
+        border-radius:50%;
+        object-fit:cover;
+        box-shadow:0 0 12px rgba(0,0,0,.25);
+    }
+
+
+    .line-icon {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+    }
+
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 16px;
+        border-radius: 16px;
+        color: #fff;
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.18);
+        box-shadow: inset 0 0 18px rgba(255,255,255,.05), 0 12px 26px rgba(0,0,0,.18);
+    }
+
+    .card-icon .line-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .icon-btn .line-icon {
+        width: 19px;
+        height: 19px;
+    }
+
+    .titles { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+    .pill {
+      padding: 11px 15px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .lead { color: var(--muted); font-size: clamp(17px, 2vw, 21px); line-height: 1.7; max-width: 720px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #06101d;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .btn.secondary { background: var(--card); color: var(--text); }
+
+    .section-head { margin-bottom: 28px; }
+    .eyebrow { color: var(--accent); font-weight: 900; text-transform: uppercase; letter-spacing: .16em; font-size: 14px; }
+    h2 { font-size: clamp(34px, 5vw, 58px); margin: 8px 0 0; letter-spacing: -.04em; }
+
+    .card {
+      background: linear-gradient(180deg, var(--card2), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .pdf-card { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+    .pdf-card p, .timeline p, .project-card p, .soft-card p { color: var(--muted); line-height: 1.65; font-size: 16px; }
+
+    .timeline { position: relative; display: grid; gap: 18px; }
+    .timeline-item { display: grid; grid-template-columns: 210px 1fr; gap: 26px; }
+    .date {
+      color: var(--accent);
+      font-weight: 950;
+      font-size: 18px;
+      line-height: 1.35;
+      letter-spacing: .01em;
+      padding-top: 3px;
+    }
+    .timeline h3 { margin: 0 0 5px; font-size: 25px; letter-spacing: -.02em; }
+    .company { color: #d9eaff; font-weight: 900; margin-bottom: 12px; font-size: 17px; }
+    ul { margin: 12px 0 0; padding-left: 20px; color: var(--muted); line-height: 1.68; font-size: 16px; }
+    li + li { margin-top: 5px; }
+
+    .education-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+    .edu-card {
+      padding: 18px;
+      border: 1px solid rgba(57,208,255,.24);
+      background: rgba(57,208,255,.07);
+      border-radius: 22px;
+    }
+    .edu-card strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .edu-card span { color: var(--muted); line-height: 1.5; }
+    .language-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .language-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      border-radius: 999px;
+      background: rgba(142,125,255,.13);
+      border: 1px solid rgba(142,125,255,.32);
+      font-weight: 900;
+    }
+    .language-badge small { color: var(--accent); font-size: 13px; }
+    .language-card{
+    margin-top:18px;
+}
+
+    .language-item{
+        display:flex;
+        align-items:center;
+        gap:16px;
+        padding:16px;
+        margin-top:12px;
+
+        border-radius:18px;
+        background:rgba(57,208,255,.08);
+        border:1px solid rgba(57,208,255,.20);
+
+        transition:.25s ease;
+    }
+
+    .language-item:hover{
+        transform:translateY(-6px);
+        background:rgba(57,208,255,.12);
+    }
+
+    .flag{
+        font-size:36px;
+    }
+
+    .language-item strong{
+        display:block;
+        font-size:18px;
+        margin-bottom:4px;
+    }
+
+    .language-item p{
+        margin:0;
+        color:var(--muted);
+    }
+
+    .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { min-height: 260px; position: relative; overflow: hidden; }
+    .project-card:before {
+      content: "";
+      position: absolute;
+      inset: -80px auto auto -80px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(57,208,255,.25), transparent 65%);
+    }
+    .project-card h3 { font-size: 24px; margin-top: 0; }
+
+    .skills-wrap { display: grid; grid-template-columns: .92fr 1.08fr; gap: 28px; align-items: center; }
+    .sphere-scene {
+      position: relative;
+      height: 560px;
+      display: grid;
+      place-items: center;
+      cursor: grab;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .sphere-scene:active { cursor: grabbing; }
+    .tech-sphere {
+      position: relative;
+      width: 430px;
+      height: 430px;
+      border-radius: 50%;
+      overflow: visible;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 31% 23%, rgba(255,255,255,.20), transparent 16%),
+        radial-gradient(circle at 42% 46%, rgba(57,208,255,.10), rgba(142,125,255,.08) 46%, rgba(255,255,255,.025) 72%, rgba(2,8,18,.35) 100%);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: inset 0 0 50px rgba(57,208,255,.10), inset -28px -32px 60px rgba(0,0,0,.32), 0 22px 70px rgba(0,0,0,.28);
+    }
+    .tech-sphere::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 34% 25%, rgba(255,255,255,.16), transparent 14%),
+        radial-gradient(circle at center, transparent 58%, rgba(7,17,31,.45) 100%);
+      z-index: 4;
+    }
+    .tech-sphere::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,.13), transparent 28%, rgba(0,0,0,.25) 82%);
+      z-index: 10;
+      mix-blend-mode: screen;
+      opacity: .55;
+    }
+    .sphere-links {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .sphere-links line { stroke: rgba(57,208,255,.28); stroke-width: 1.35; }
+    .hex {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 72px;
+      height: 63px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(25,43,64,.98), rgba(9,19,34,.94));
+      border: 1px solid rgba(145,193,231,.28);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      box-shadow: 0 12px 26px rgba(0,0,0,.28), inset 0 0 16px rgba(255,255,255,.06);
+      cursor: pointer;
+      user-select: none;
+      transition: filter .18s ease, box-shadow .18s ease, opacity .18s ease, border-color .18s ease;
+      z-index: 3;
+      pointer-events: auto;
+    }
+    .hex:hover, .hex.active { filter: brightness(1.18) saturate(1.16); border-color: rgba(57,208,255,.78); box-shadow: 0 18px 38px rgba(57,208,255,.28), inset 0 0 20px rgba(57,208,255,.12); }
+    .hex img { width: 40px; height: 40px; object-fit: contain; filter: drop-shadow(0 5px 8px rgba(0,0,0,.25)); }
+    .fallback-logo { font-size: 12px; font-weight: 950; color: #f0f7ff; letter-spacing: -.02em; text-align: center; line-height: 1; }
+    .tech-info {
+      position: absolute;
+      right: 22px;
+      top: 22px;
+      width: min(265px, calc(100% - 44px));
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(7,17,31,.91);
+      border: 1px solid rgba(57,208,255,.36);
+      box-shadow: 0 18px 52px rgba(0,0,0,.36);
+      backdrop-filter: blur(14px);
+      z-index: 30;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, translate .2s ease;
+      translate: 10px 0;
+    }
+    .tech-info.visible { opacity: 1; translate: 0 0; }
+    .tech-info h3 { margin: 0 0 6px; font-size: 20px; }
+    .tech-info p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 15px; }
+
+    .soft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .soft-card { transition: transform .25s ease, background .25s ease; }
+    .soft-card:hover { transform: translateY(-8px); background: rgba(255,255,255,.13); }
+    .soft-card h3 { font-size: 23px; margin-top: 0; }
+
+    .card{
+        transition: transform .25s ease,
+                    background .25s ease,
+                    box-shadow .25s ease;
+    }
+
+    .card:hover{
+        transform: translateY(-8px);
+    }
+
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .contact-card { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 84px; font-weight: 900; }
+    .linkedin-card svg { width: 34px; height: 34px; margin-right: 12px; }
+    footer { padding: 34px 0; color: var(--muted); text-align: center; border-top: 1px solid var(--line); }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .brand-short {
+        display: none;
+    }
+
+    @media (max-width: 640px) {
+        .brand-full {
+            display: none;
+        }
+
+        .brand-short {
+            display: inline;
+        }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links { gap: 12px; font-size: 15px; }
+      .hero-grid, .skills-wrap, .pdf-card { grid-template-columns: 1fr; text-align: center; }
+      .actions, .titles { justify-content: center; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .projects, .soft-grid, .contact-grid, .education-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 0; }
+      .date { font-size: 19px; }
+    }
+    @media (max-width: 640px) {
+      .nav { top: 10px; padding: 10px 12px; }
+      .brand { font-size: 16px; }
+      .nav-links a { display: none; }
+      .lang-btn { padding: 10px 14px; }
+      .hero { padding-top: 90px; }
+      .card { padding: 22px; }
+      .sphere-scene { height: 430px; }
+      .tech-sphere { width: 305px; height: 305px; }
+      .hex { width: 52px; height: 46px; }
+      .hex img { width: 30px; height: 30px; }
+      .tech-info { top: auto; right: 12px; bottom: 12px; width: calc(100% - 24px); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="#top">
+        <span class="brand-full" data-i18n="brandName">Kopcsó Máté Levente</span>
+        <span class="brand-short" data-i18n="brandNameShort">KML</span>
+    </a>
+    <div class="nav-links">
+      <a href="#experience" data-i18n="navExperience">Tapasztalat</a>
+      <a href="#projects" data-i18n="navFocus">Fókusz</a>
+      <a href="#skills" data-i18n="navSkills">Technológiák</a>
+      <a href="#contact" data-i18n="navContact">Kapcsolat</a>
+      <button class="lang-btn" id="langBtn">EN</button>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-grid">
+        <div class="photo-wrap reveal">
+          <img src="assets/profile.png" alt="Kopcsó Máté Levente portré" />
+        </div>
+        <div class="reveal">
+          <h1 data-i18n="heroName">Kopcsó Máté<br><span class="gradient-text">Levente</span></h1>
+          <div class="titles">
+            <span class="pill">Full-Stack Developer</span>
+            <span class="pill">Automation & Process Optimization Specialist</span>
+            <span class="pill">Business-minded Software Developer</span>
+          </div>
+          <p class="lead" data-i18n="intro">Gazdasági háttérrel rendelkező szoftverfejlesztő vagyok, aki üzleti szemléletét a technológia erejével ötvözi. Szeretek új rendszereket létrehozni, üzleti folyamatokat automatizálni és meglévő alkalmazásokat gyorsabbá, átláthatóbbá és felhasználóbarátabbá tenni.</p>
+          <div class="actions">
+            <a class="btn" href="#cv" data-i18n="viewCv">CV megtekintése</a>
+            <a class="btn secondary linkedin-card" href="https://www.linkedin.com/in/kopcsomate/" target="_blank" rel="noopener" aria-label="LinkedIn profil">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.1 20.45H3.54V9H7.1v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z"/></svg>
+              LinkedIn
+            </a>
+            <a class="btn secondary icon-btn" href="mailto:kopcsomate@gmail.com">
+                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M4 7l8 6 8-6"></path>
+                </svg>
+                Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" class="container reveal">
+      <div class="card pdf-card">
+        <div>
+          <div class="eyebrow" data-i18n="pdfEyebrow">PDF verzió</div>
+          <h2 data-i18n="pdfTitle">Gyorsan elérhető CV</h2>
+          <p data-i18n="pdfText">Ha klasszikus formátumban szeretnéd átnézni a szakmai hátteremet, a PDF verzió egy kattintással megnyitható.</p>
+        </div>
+        <a class="btn" id="pdfBtn" href="assets/Kopcso_Mate_CV_HU.pdf" target="_blank" data-i18n="pdfBtn">CV megnyitása</a>
+      </div>
+    </section>
+
+    <section id="experience" class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="expEyebrow">Szakmai út</div>
+        <h2 data-i18n="expTitle">Tapasztalat & tanulmányok</h2>
+      </div>
+      <div class="timeline">
+        <article class="card timeline-item">
+          <div class="date" data-i18n="d1">2025. augusztus<br>jelen</div>
+          <div>
+            <h3 data-i18n="job1">Adatelemző és programozó</h3>
+            <div class="company">MODIT Zrt.</div>
+            <ul>
+              <li data-i18n="j1b1">Python alapú desktop alkalmazások és webes megoldások fejlesztése üzleti és logisztikai folyamatok támogatására.</li>
+              <li data-i18n="j1b2">Adatfeldolgozó és vizualizációs megoldások készítése, amelyek gyorsabb döntéshozatalt és átláthatóbb működést támogatnak.</li>
+              <li data-i18n="j1b3">SQL lekérdezések, riportok és adatmodellek fejlesztése, optimalizálása és karbantartása.</li>
+              <li data-i18n="j1b4">Manuális feladatokat kiváltó belső eszközök tervezése, tesztelése és folyamatos továbbfejlesztése.</li>
+              <li data-i18n="j1b5">Rendszerhibák elemzése, teljesítményproblémák feltárása és felhasználóbarát megoldások kialakítása.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="date" data-i18n="d2">2023. április<br>2025. augusztus</div>
+          <div>
+            <h3 data-i18n="job2">Full-Stack Fejlesztő</h3>
+            <div class="company">ZeroTime Services Kft.</div>
+            <ul>
+              <li data-i18n="j2b1">Egyedi WHMCS modulok fejlesztése és karbantartása ügyfélkezelési, domain- és adminisztrációs folyamatokra.</li>
+              <li data-i18n="j2b2">API integrációk megvalósítása külső szolgáltatásokkal, adatszinkronizációval és automatizált üzleti folyamatokkal.</li>
+              <li data-i18n="j2b3">Domain automatizációs megoldások fejlesztése regisztrációs, kezelési, dokumentációs és adminisztratív feladatok támogatására.</li>
+              <li data-i18n="j2b4">WordPress alapú weboldalak, egyedi bővítmények és testreszabott frontend/backend funkciók készítése.</li>
+              <li data-i18n="j2b5">PHP, SQL és JavaScript alapú rendszerek optimalizálása a stabilabb, gyorsabb és átláthatóbb működés érdekében.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card timeline-item">
+          <div class="date" data-i18n="d3">2022. január<br>2022. augusztus</div>
+          <div>
+            <h3 data-i18n="job3">Gazdasági gyakornok</h3>
+            <div class="company">CL Hungary Kft.</div>
+            <ul>
+              <li data-i18n="j3b1">Pénzügyi és működési elemzések készítése üzleti optimalizációs döntések támogatására.</li>
+              <li data-i18n="j3b2">Szállítási útvonalak, logisztikai folyamatok és adminisztratív munkafolyamatok hatékonyságának javítása.</li>
+              <li data-i18n="j3b3">Riportok, kimutatások és belső dokumentációk készítése pontos, strukturált adatfeldolgozással.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card">
+          <div class="section-head">
+            <div class="eyebrow" data-i18n="eduEyebrow">Tanulmányok</div>
+            <h2 data-i18n="eduTitle">Tudás, amelyre építek</h2>
+          </div>
+          <div class="education-grid">
+            <div class="edu-card"><strong>Green Fox Academy</strong><span data-i18n="edu1">Full-Stack Fejlesztői Bootcamp<br>2022. szeptember – 2023. február</span></div>
+            <div class="edu-card"><strong data-i18n="school2">Budapesti Corvinus Egyetem</strong><span data-i18n="edu2">Nemzetközi Gazdálkodás BSc<br>2018. szeptember – 2023. január</span></div>
+            <div class="edu-card"><strong data-i18n="school3">Miskolci Herman Ottó Gimnázium</strong><span data-i18n="edu3">Spanyol kéttannyelvű képzés<br>2013. szeptember – 2018. június</span></div>
+          </div>
+        </article>
+        <article class="card language-card">
+            <div class="section-head">
+                <div class="eyebrow" data-i18n="languageEyebrow">Nyelvtudás</div>
+                <h2 data-i18n="languageTitle">Nemzetközi kommunikáció</h2>
+            </div>
+
+            <div class="language-item">
+                <img src="https://flagcdn.com/gb.svg" class="flag-img" alt="English">
+                <div>
+                    <strong data-i18n="languageEnglish">Angol</strong>
+                    <p data-i18n="languageEnglishLevel">C1 felsőfokú nyelvtudás</p>
+                </div>
+            </div>
+
+            <div class="language-item">
+                <img src="https://flagcdn.com/es.svg" class="flag-img" alt="Spanish">
+                <div>
+                    <strong data-i18n="languageSpanish">Spanyol</strong>
+                    <p data-i18n="languageSpanishLevel">C1 felsőfokú nyelvtudás</p>
+                </div>
+            </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="focusEyebrow">Kiemelt területek</div>
+        <h2 data-i18n="focusTitle">Ahol értéket teremtek</h2>
+      </div>
+      <div class="projects">
+        <article class="card project-card">
+            <div class="card-icon">
+                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+                    <path d="M8 21h8"></path>
+                    <path d="M12 17v4"></path>
+                    <path d="M8 10l-2 2 2 2"></path>
+                    <path d="M16 10l2 2-2 2"></path>
+                </svg>
+            </div>
+            <h3 data-i18n="focus1Title">Full-Stack fejlesztés</h3>
+            <p data-i18n="p1">Frontend és backend rendszerek fejlesztése, karbantartása és optimalizálása JavaScript, PHP, Python és SQL technológiákkal.</p>
+        </article>
+
+        <article class="card project-card">
+            <div class="card-icon">
+                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.1 2.1-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V20h-3v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-2.1-2.1.1-.1A1.7 1.7 0 0 0 5 14.7a1.7 1.7 0 0 0-1.5-1H3.4v-3h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 2.1-2.1.1.1A1.7 1.7 0 0 0 8.7 6a1.7 1.7 0 0 0 1-1.5v-.1h3v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 2.1 2.1-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1v3h-.1a1.7 1.7 0 0 0-1.5 1Z"></path>
+                </svg>
+            </div>
+            <h3 data-i18n="focus2Title">Automatizáció és folyamatoptimalizálás</h3>
+            <p data-i18n="p2">Egyedi alkalmazások és automatizációs megoldások fejlesztése manuális folyamatok kiváltására és üzleti hatékonyság növelésére.</p>
+        </article>
+
+        <article class="card project-card">
+            <div class="card-icon">
+                <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path>
+                    <path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20.1l1.1-1.1"></path>
+                </svg>
+            </div>
+            <h3 data-i18n="focus3Title">API integrációk és modulfejlesztés</h3>
+            <p data-i18n="p3">Meglévő rendszerek bővítése, külső szolgáltatások integrálása és egyedi modulok fejlesztése üzleti igények alapján.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="container reveal">
+      <div class="skills-wrap">
+        <div>
+          <div class="eyebrow" data-i18n="techEyebrow">Tech stack</div>
+          <h2 data-i18n="techTitle">Rendszerek és technológiák</h2>
+          <p class="lead" data-i18n="techText">Rugalmasan dolgozom frontend, backend, adatbázis, CMS és üzleti rendszerekkel. A gömbön megtalálhatóak a technológiák, amelyekben releváns tapasztalattal rendelkezem.</p>
+        </div>
+        <div class="sphere-scene card" id="scene"><div class="tech-sphere" id="sphere"></div></div>
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="softEyebrow">Soft skillek</div>
+        <h2 data-i18n="softTitle">A technológián túl</h2>
+      </div>
+      <div class="soft-grid">
+        <article class="card soft-card">
+          <div class="card-icon">
+            <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 3h6v4h4v6h-4v4H9v-4H5V7h4V3Z"></path>
+              <path d="M9 7h6"></path>
+              <path d="M9 13h6"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="soft1Title">Problémamegoldás</h3>
+          <p data-i18n="s1">Analitikus gondolkodás, gyors hibakeresés és megoldásfókuszú hozzáállás.</p>
+        </article>
+        <article class="card soft-card">
+          <div class="card-icon">
+            <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 19V5"></path>
+              <path d="M4 19h16"></path>
+              <path d="M8 16v-5"></path>
+              <path d="M12 16V8"></path>
+              <path d="M16 16v-7"></path>
+              <path d="M8 11l4-3 4 1 4-4"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="soft2Title">Üzleti szemlélet</h3>
+          <p data-i18n="s2">Üzleti folyamatok megértése és technológiai megoldásokra fordítása.</p>
+        </article>
+        <article class="card soft-card">
+          <div class="card-icon">
+            <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+              <path d="M16 12a4 4 0 1 0 0-8"></path>
+              <path d="M3 21a5 5 0 0 1 10 0"></path>
+              <path d="M13 17a5 5 0 0 1 8 4"></path>
+            </svg>
+          </div>
+          <h3 data-i18n="soft3Title">Kommunikáció</h3>
+          <p data-i18n="s3">Együttműködés, tiszta kommunikáció és önálló munkavégzés. Részlegek közötti kommunikáció elősegítése.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+      <div class="section-head"><div class="eyebrow" data-i18n="contactEyebrow">Kapcsolat</div><h2 data-i18n="contactTitle">Dolgozzunk együtt!</h2></div>
+      <div class="contact-grid">
+        <a class="card contact-card" href="mailto:kopcsomate@gmail.com">
+          <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M4 7l8 6 8-6"></path>
+          </svg>
+          kopcsomate@gmail.com
+        </a>
+        <a class="card contact-card linkedin-card" href="https://www.linkedin.com/in/kopcsomate/" target="_blank" rel="noopener" aria-label="LinkedIn profil">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.1 20.45H3.54V9H7.1v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z"/></svg>
+          LinkedIn
+        </a>
+        <div class="card contact-card">
+          <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+          <span data-i18n="location">Budapest, Magyarország</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span><span data-i18n="footerName">Kopcsó Máté Levente</span></footer>
+
+  <script>
+    const CV_FILES = {
+      hu: 'assets/Kopcso_Mate_CV_HU.pdf',
+      en: 'assets/Kopcso_Mate_CV_EN.pdf'
+    };
+
+    const translations = {
+      hu: {},
+      en: {
+        navExperience: 'Experience', navFocus: 'Focus', navSkills: 'Technologies', navContact: 'Contact',
+        intro: 'I am a software developer with a business background, combining analytical thinking with technology. I enjoy building new systems, automating business processes, and making existing applications faster, clearer, and more user-friendly.',
+        viewCv: 'View CV', pdfEyebrow: 'PDF version', pdfTitle: 'Quick access CV', pdfText: 'If you prefer the classic resume format, the English PDF version is available with one click.', pdfBtn: 'Open CV',
+        expEyebrow: 'Career path', expTitle: 'Experience & education',
+        d1: 'August 2025<br>present', d2: 'April 2023<br>August 2025', d3: 'January 2022<br>August 2022',
+        job1: 'Data Analyst & Programmer', job2: 'Full-Stack Developer', job3: 'Business Intern',
+        j1b1: 'Developed Python-based desktop applications and web solutions supporting business and logistics workflows.',
+        j1b2: 'Built data processing and visualization solutions to support faster decision-making and more transparent operations.',
+        j1b3: 'Created, optimized and maintained SQL queries, reports and data models.',
+        j1b4: 'Designed, tested and continuously improved internal tools that replaced manual tasks.',
+        j1b5: 'Analyzed system issues, identified performance bottlenecks and delivered user-friendly improvements.',
+        j2b1: 'Developed and maintained custom WHMCS modules for client management, domain and administrative workflows.',
+        j2b2: 'Implemented API integrations with external services, data synchronization and automated business processes.',
+        j2b3: 'Built domain automation solutions supporting registration, management, documentation and administrative tasks.',
+        j2b4: 'Created WordPress websites, custom plugins and tailored frontend/backend features.',
+        j2b5: 'Optimized PHP, SQL and JavaScript based systems for more stable, faster and clearer operation.',
+        j3b1: 'Prepared financial and operational analyses to support business optimization decisions.',
+        j3b2: 'Improved transport routes, logistics processes and administrative workflows.',
+        j3b3: 'Created reports, summaries and internal documentation using accurate, structured data handling.',
+        eduEyebrow: 'Education & languages', eduTitle: 'The Foundation I Build On',
+        edu1: 'Full-Stack Developer Bootcamp<br>September 2022 – February 2023',
+        edu2: 'International Business BSc<br>September 2018 – January 2023',
+        edu3: 'Spanish bilingual education<br>September 2013 – June 2018',
+        languageEyebrow: 'Languages', languageTitle: 'International communication', languageEnglish: 'English', languageEnglishLevel: 'C1 advanced proficiency', languageSpanish: 'Spanish', languageSpanishLevel: 'C1 advanced proficiency',
+        langEn: 'English advanced proficiency', langEs: 'Spanish advanced proficiency',
+        focusEyebrow: 'Key areas', focusTitle: 'Where I create value',
+        p1: 'Development, maintenance and optimization of frontend and backend systems using JavaScript, PHP, Python and SQL.',
+        p2: 'Custom applications and automation solutions designed to replace manual processes and increase business efficiency.',
+        p3: 'Extending existing systems, integrating external services and building custom modules based on business needs.',
+        techEyebrow: 'Tech stack', techTitle: 'Systems and technologies', techText: 'I work flexibly with frontend, backend, databases, CMS platforms and business systems. On the sphere you can find the technologies that I have relevant experience with.',
+        softEyebrow: 'Soft skills', softTitle: 'Beyond technology', soft1Title: 'Problem Solving', soft2Title: 'Business Mindset', soft3Title: 'Communication',
+        s1: 'Analytical thinking, fast debugging and a solution-focused approach.', s2: 'Understanding business processes and translating them into technology solutions.', s3: 'Collaboration, clear communication and independent work. Enhancing communication between departments.',
+        contactEyebrow: 'Contact', contactTitle: 'Let’s work together!', location: 'Budapest, Hungary',
+        focus1Title: 'Full-Stack Development', focus2Title: 'Automation & Process Optimization', focus3Title: 'API Integration & Module Development',
+        heroName: 'Máté Levente<br><span class="gradient-text">Kopcsó</span>', brandName: 'Máté Levente Kopcsó', brandNameShort: 'MLK', footerName: 'Máté Levente Kopcsó',
+        school2: 'Corvinus University of Budapest', school3: 'Herman Ottó High School of Miskolc',
+      }
+    };
+
+    const original = {};
+    document.querySelectorAll('[data-i18n]').forEach(el => original[el.dataset.i18n] = el.innerHTML);
+    let lang = 'hu';
+    const pdfBtn = document.getElementById('pdfBtn');
+
+    document.getElementById('langBtn').addEventListener('click', () => {
+      lang = lang === 'hu' ? 'en' : 'hu';
+      document.documentElement.lang = lang;
+      document.getElementById('langBtn').textContent = lang === 'hu' ? 'EN' : 'HU';
+      pdfBtn.href = CV_FILES[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        el.innerHTML = lang === 'hu' ? original[key] : (translations.en[key] || original[key]);
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
+    }, { threshold: .14 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const iconBase = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/';
+    const techItems = [
+      { name: 'JavaScript', icon: iconBase + 'javascript/javascript-original.svg', hu: 'Interaktív frontend funkciók, dinamikus felületek és böngészőoldali logika építésére használt nyelv.', en: 'A language for interactive frontend features, dynamic interfaces and browser-side logic.' },
+      { name: 'PHP', icon: iconBase + 'php/php-original.svg', hu: 'Szerveroldali webfejlesztéshez, egyedi modulokhoz és üzleti rendszerekhez használt backend technológia.', en: 'A backend technology for server-side web development, custom modules and business systems.' },
+      { name: 'Python', icon: iconBase + 'python/python-original.svg', hu: 'Automatizációhoz, adatfeldolgozáshoz, elemző alkalmazásokhoz és belső eszközökhöz használt nyelv.', en: 'Used for automation, data processing, analytical applications and internal tools.' },
+      { name: 'Node.js', icon: iconBase + 'nodejs/nodejs-original.svg', hu: 'JavaScript alapú szerveroldali környezet gyors API-khoz és modern backend megoldásokhoz.', en: 'A JavaScript runtime for fast APIs and modern backend solutions.' },
+      { name: 'MySQL', icon: iconBase + 'mysql/mysql-original.svg', hu: 'Relációs adatbázis-kezelő lekérdezésekhez, riportokhoz és üzleti adatok kezeléséhez.', en: 'A relational database system for queries, reports and business data management.' },
+      { name: 'PostgreSQL', icon: iconBase + 'postgresql/postgresql-original.svg', hu: 'Stabil, erős SQL adatbázis komplex adatmodellekhez és megbízható alkalmazásokhoz.', en: 'A robust SQL database for complex data models and reliable applications.' },
+      { name: 'HTML5', icon: iconBase + 'html5/html5-original.svg', hu: 'Modern weboldalak strukturális alapja, reszponzív és szemantikus felületekhez.', en: 'The structural foundation of modern, responsive and semantic websites.' },
+      { name: 'CSS3', icon: iconBase + 'css3/css3-original.svg', hu: 'Látványos, reszponzív és animált felületek kialakítására használt stílusnyelv.', en: 'A styling language for responsive, polished and animated interfaces.' },
+      { name: 'Bootstrap', icon: iconBase + 'bootstrap/bootstrap-original.svg', hu: 'Gyors reszponzív felületépítéshez, komponensekhez és egységes UI kialakításhoz.', en: 'Used for fast responsive layouts, components and consistent UI design.' },
+      { name: 'jQuery', icon: iconBase + 'jquery/jquery-original.svg', hu: 'Régebbi és meglévő rendszerek interaktív frontend funkcióinak gyors fejlesztésére.', en: 'Useful for quickly improving interactive frontend features in legacy and existing systems.' },
+      { name: 'WordPress', icon: iconBase + 'wordpress/wordpress-original.svg', hu: 'Weboldalak, egyedi sablonok és bővítmények fejlesztésére használt CMS platform.', en: 'A CMS platform for websites, custom themes and plugin development.' },
+      { name: 'Odoo', fallback: 'Odoo', hu: 'Vállalatirányítási rendszer üzleti folyamatok, modulok és automatizációk kezelésére.', en: 'An ERP platform for business processes, modules and automations.' },
+      { name: 'WHMCS', fallback: 'WHMCS', hu: 'Ügyfélkezelési, számlázási, domain és hosting folyamatokat kezelő üzleti platform.', en: 'A business platform for client management, billing, domain and hosting workflows.' },
+      { name: 'Git', icon: iconBase + 'git/git-original.svg', hu: 'Verziókezeléshez, együttműködéshez és biztonságos fejlesztési munkafolyamatokhoz.', en: 'Version control for collaboration and safe development workflows.' },
+      { name: 'Linux', icon: iconBase + 'linux/linux-original.svg', hu: 'Szerverkörnyezetek, fejlesztői eszközök és stabil üzemeltetési alapok kezelésére.', en: 'Used for server environments, developer tooling and stable operations.' },
+      { name: 'VS Code', icon: iconBase + 'vscode/vscode-original.svg', hu: 'Modern fejlesztőkörnyezet gyors, bővíthető és hatékony munkavégzéshez.', en: 'A modern development environment for fast, extensible and efficient work.' },
+      { name: 'Docker', icon: iconBase + 'docker/docker-original.svg', hu: 'Konténerizált fejlesztési és futtatási környezetek egységesítésére.', en: 'Used to standardize containerized development and runtime environments.' },
+      { name: 'GitHub', icon: iconBase + 'github/github-original.svg', hu: 'Kódtárolás, verziókövetés, review és fejlesztői együttműködés platformja.', en: 'A platform for code hosting, version tracking, review and collaboration.' },
+      { name: 'NPM', icon: iconBase + 'npm/npm-original-wordmark.svg', hu: 'JavaScript csomagok, függőségek és frontend/backend eszközök kezelésére.', en: 'Used to manage JavaScript packages, dependencies and development tools.' },
+      { name: 'REST API', fallback: 'API', hu: 'Rendszerek összekapcsolására, adatszinkronra és automatizált üzleti folyamatokra.', en: 'Used to connect systems, synchronize data and automate business workflows.' }
+    ];
+
+    const sphere = document.getElementById('sphere');
+    sphere.innerHTML = '<svg class="sphere-links" id="sphereLinks"></svg><div class="tech-info" id="techInfo"><h3></h3><p></p></div>';
+    const linksSvg = document.getElementById('sphereLinks');
+    const techInfo = document.getElementById('techInfo');
+    const infoTitle = techInfo.querySelector('h3');
+    const infoText = techInfo.querySelector('p');
+
+    const points = techItems.map((item, i) => {
+      const n = techItems.length;
+      const y = 1 - (i / (n - 1)) * 2;
+      const radiusAtY = Math.sqrt(1 - y * y);
+      const theta = i * Math.PI * (3 - Math.sqrt(5));
+      return { item, x: Math.cos(theta) * radiusAtY, y, z: Math.sin(theta) * radiusAtY };
+    });
+
+    points.forEach((point, index) => {
+      const el = document.createElement('button');
+      el.className = 'hex';
+      el.type = 'button';
+      el.setAttribute('aria-label', point.item.name);
+      if (point.item.icon) {
+        const img = document.createElement('img');
+        img.src = point.item.icon;
+        img.alt = point.item.name + ' logo';
+        img.loading = 'lazy';
+        el.appendChild(img);
+      } else {
+        const fallback = document.createElement('span');
+        fallback.className = 'fallback-logo';
+        fallback.textContent = point.item.fallback || point.item.name;
+        el.appendChild(fallback);
+      }
+      el.addEventListener('pointerdown', (event) => event.stopPropagation());
+      el.addEventListener('click', (event) => {
+        event.stopPropagation();
+        document.querySelectorAll('.hex.active').forEach(active => active.classList.remove('active'));
+        el.classList.add('active');
+        infoTitle.textContent = point.item.name;
+        infoText.textContent = lang === 'hu' ? point.item.hu : point.item.en;
+        techInfo.classList.add('visible');
+      });
+      point.el = el;
+      sphere.appendChild(el);
+    });
+
+    const linkPairs = [];
+    for (let i = 0; i < points.length; i++) {
+      const nearest = points
+        .map((p, j) => ({ j, d: Math.hypot(points[i].x - p.x, points[i].y - p.y, points[i].z - p.z) }))
+        .filter(p => p.j !== i)
+        .sort((a, b) => a.d - b.d)
+        .slice(0, 3);
+      nearest.forEach(n => {
+        const key = [i, n.j].sort((a, b) => a - b).join('-');
+        if (!linkPairs.some(pair => pair.key === key)) linkPairs.push({ key, a: i, b: n.j });
+      });
+    }
+
+    const scene = document.getElementById('scene');
+    let dragging = false, lastX = 0, lastY = 0;
+    let rotX = -10, rotY = 0;
+    let velocityY = .0038;
+
+    function rotatePoint(point) {
+      const cx = Math.cos(rotX), sx = Math.sin(rotX);
+      const cy = Math.cos(rotY), sy = Math.sin(rotY);
+      let x = point.x * cy + point.z * sy;
+      let z = -point.x * sy + point.z * cy;
+      let y = point.y * cx - z * sx;
+      z = point.y * sx + z * cx;
+      return { x, y, z };
+    }
+
+    function renderSphere() {
+      if (!dragging) rotY += velocityY;
+      const box = sphere.getBoundingClientRect();
+      const size = Math.min(box.width || 430, box.height || 430);
+      const r = size * .385;
+      const perspective = size * 1.9;
+      const rendered = points.map((point) => {
+        const p = rotatePoint(point);
+        const scale = perspective / (perspective - p.z * r);
+        const xRel = p.x * r * scale;
+        const yRel = p.y * r * scale;
+        const visualScale = .58 + ((p.z + 1) / 2) * .50;
+        const visibleFactor = Math.max(.08, (p.z + 1) / 2);
+        point.el.style.transform = `translate(-50%, -50%) translate(${xRel}px, ${yRel}px) scale(${visualScale})`;
+        point.el.style.opacity = String(.22 + visibleFactor * .78);
+        point.el.style.zIndex = String(Math.round(12 + p.z * 16));
+        point.el.style.pointerEvents = p.z < -0.72 ? 'none' : 'auto';
+        return { x: size / 2 + xRel, y: size / 2 + yRel, z: p.z };
+      });
+
+      linksSvg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+      linksSvg.innerHTML = linkPairs.map(pair => {
+        const a = rendered[pair.a], b = rendered[pair.b];
+        const depth = (a.z + b.z) / 2;
+        const opacity = Math.max(0, Math.min(1, depth + .7));
+        return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" opacity="${(opacity * .62).toFixed(2)}" />`;
+      }).join('');
+
+      requestAnimationFrame(renderSphere);
+    }
+
+    scene.addEventListener('pointerdown', e => {
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      scene.setPointerCapture(e.pointerId);
+    });
+    scene.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      rotY += (e.clientX - lastX) * .009;
+      rotX -= (e.clientY - lastY) * .009;
+      rotX = Math.max(-1.15, Math.min(1.15, rotX));
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+    scene.addEventListener('pointerup', () => dragging = false);
+    scene.addEventListener('pointercancel', () => dragging = false);
+    scene.addEventListener('mouseleave', () => dragging = false);
+    scene.addEventListener('click', e => {
+      if (!e.target.closest('.hex')) {
+        techInfo.classList.remove('visible');
+        document.querySelectorAll('.hex.active').forEach(active => active.classList.remove('active'));
+      }
+    });
+    renderSphere();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
